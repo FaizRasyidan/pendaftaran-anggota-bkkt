@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/bootstarp/css/bootstrap.min.css">
+    <title>Form Pendaftaran</title>
+</head>
+<body>
+    <div id="preloader">      
+        <div id="loading-animation">&nbsp;</div>
+      </div>
+    <div style="background-color: white;" class="container p-3 my-3 border"> 
+        <h1 class="text-center">FORM PENDAFTARAN ANGGOTA BKKT</h1>
+        <form name="submit-to-google-sheet" method="post">
+            <div class="alert alert-secondary">
+                <strong>DATA DIRI</strong>
+            </div>
+            <div class="row">
+                <div class="col-sm-7">
+                    <div class="form-grup">
+                        <label>Nama Lengkap :</label>
+                        <input type="text" name="nama" class="form-control" placeholder="Masukan Nama Lengkap">
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                    <div class="form-grup"></div>
+                        <label>Nomer Induk Mahasiswa (NIM) :</label>
+                        <input type="text" name="nim" class="form-control" placeholder="Masukan NIM">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-grup">
+                            <label>Tempat Lahir :</label>
+                            <input type="text" name="tempat_lahir" class="form-control" placeholder="Masukan Tempat Lahir">
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-grup">
+                            <label>Tanggal Lahir :</label>
+                            <input type="date" name="tanggal_lahir" class="form-control">
+                        </div>
+                    </div> 
+                    <div class="col-sm-3">
+                        <div class="form-grup">
+                            <label>Peminatan :</label>
+                            <select class="form-control" name="Pilihan">
+                                <option>Pilihan</option>
+                                <option value="Karawitan">Karawitan</option>
+                                <option value="Tari">Tari</option>
+                            </select>
+                        </div>
+                    </div> 
+                </div>   
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-grup">
+                            <label>Jenis Kelamin</label>
+                            <br>
+                            <input type="radio" name="jk" value="Laki-Laki">Laki-Laki
+                            <br>
+                            <input type="radio" name="jk" value="Perempuan">Perempuan
+                        </div>
+                    </div>     
+                <div class="col-sm-5">
+                     <div class="form-grup">
+                         <label>Prodi :</label>
+                        <input type="text" name="prodi" class="form-control" placeholder="Masukan Prodimu">
+                    </div> 
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="form-grup">
+                        <label>E-mail :</label>
+                    <input type="email" name="email" class="form-control" placeholder="Masukan E-mail">
+                    </div>  
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-grup">
+                        <label>Nomer Whatsapp :</label>
+                    <input type="text" name="no_wa" class="form-control" placeholder="Masukan Nomer Whatsapp">
+                    </div>  
+                </div>
+            </div>
+            <br>
+
+            <div class="alert alert-secondary">
+                <strong>DATA DIRI</strong>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-grup">
+                        <label>Alamat Rumah :</label>
+                        <textarea class="form-control" name="alamat_rumah" rows="2" id="alamat" ></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm">
+                    <div class="form-grup">
+                        <label>Kecamatan :</label>
+                        <input type="text" name="kecamatan" class="form-control" placeholder="Masukan Kecamatan">
+                    </div>
+                </div>
+                <div class="col-sm">
+                    <div class="form-grup">
+                        <label>Kabupaten/Kota :</label>
+                        <input type="text" name="kabupaten" class="form-control" placeholder="Masukan Kabupaten/Kota">
+                    </div>
+                </div>
+                <div class="col-sm">
+                    <div class="form-grup">
+                        <label>Provinsi :</label>
+                        <input type="text" name="provinsi" class="form-control" placeholder="Masukan Provinsi">
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div style="background-color: rgb(104, 219, 110);" class="alert alert-succses">
+                <strong>
+                    <input type="checkbox" name="pernyataan1" value="pernyataan1">
+                    Saya menyatakan bahwa Data yang Saya isikan diatas sudah benar
+                    <br>
+                    <input type="checkbox" name="pernyataan2" value="pernyataan2">
+                    Saya bersedia menerima sanksi pembatalan penerimaan anggota BKKT apabila melanggar pernyataan ini
+                </strong>
+            </div>
+
+            <center>
+                <button type="submit" name="submit" class="btn btn-primary">Daftar</button>
+                <button type="reset" name="reset" class="btn btn-secondary">Reset</button>
+            </center>
+            <br>
+            <span id="Success"></span>
+        </form>
+
+        <script>
+            const scriptURL = 'https://script.google.com/macros/s/AKfycbwH8vqD-YHDBtjxpOadb8tLHQKEL7yBS1J-VNAyJi4z5TZ732cJqjv_R8-jM4UGqcY/exec'
+            const form = document.forms['submit-to-google-sheet']
+            const Success = document.getElementById('Success');
+            form.addEventListener('submit', e => {
+              e.preventDefault()
+              fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+                .then(response => {
+                    Success.innerHTML="FORM PENDAFTARAN BERHASIL TERSUBMIT";
+                })
+                .catch(error => console.error('Error!', error.message))
+            })
+          </script>
+    </div>
+</body>
+</html>
